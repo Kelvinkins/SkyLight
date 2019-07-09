@@ -215,15 +215,14 @@ namespace SkyLightWeb.Migrations
                     PatientID = table.Column<string>(nullable: false),
                     PatientName = table.Column<string>(nullable: true),
                     PatientAddress = table.Column<string>(nullable: true),
-                    HospitalID = table.Column<int>(nullable: false),
-                    HospitalId = table.Column<string>(nullable: true)
+                    HospitalID = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Patients", x => x.PatientID);
                     table.ForeignKey(
-                        name: "FK_Patients_Hospitals_HospitalId",
-                        column: x => x.HospitalId,
+                        name: "FK_Patients_Hospitals_HospitalID",
+                        column: x => x.HospitalID,
                         principalTable: "Hospitals",
                         principalColumn: "HospitalId",
                         onDelete: ReferentialAction.Restrict);
@@ -277,9 +276,9 @@ namespace SkyLightWeb.Migrations
                 column: "HospitalId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patients_HospitalId",
+                name: "IX_Patients_HospitalID",
                 table: "Patients",
-                column: "HospitalId");
+                column: "HospitalID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

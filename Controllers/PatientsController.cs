@@ -9,29 +9,29 @@ namespace SkyLightWeb.Controllers
    
     [Route("api/[controller]")]
     [ApiController]
-    public class HospitalsController : ControllerBase
+    public class PatientsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public HospitalsController(ApplicationDbContext context)
+        public PatientsController(ApplicationDbContext context)
         {
             _context = context;
-            if (_context.Hospitals.Count() == 0)
+            if (_context.Patients.Count() == 0)
             {
-                _context.Hospitals.Add(new Hospital { HospitalId = Guid.NewGuid().ToString(), HospitalName = "Hulia Health Care", HospitalAddress = "2 Jigawa Street, Ikorodu Lagos" });
+                _context.Patients.Add(new Patient { PatientID = Guid.NewGuid().ToString(), PatientName = "Samuel Kingsley", PatientAddress = "2 Jigawa Street, Ikorodu Lagos",HospitalID="25cbde11-4d10-4dee-b872-f732d3744ab3" });
                 _context.SaveChanges();
             }
         }
 
         [HttpGet]
-        public ActionResult<List<Hospital>> GetAll()
+        public ActionResult<List<Patient>> GetAll()
         {
-            return _context.Hospitals.ToList();
+            return _context.Patients.ToList();
         }
 
-        [HttpGet("{id}", Name = "GetHospital")]
-        public ActionResult<Hospital> GetById(long id)
+        [HttpGet("{id}", Name = "GetPatient")]
+        public ActionResult<Patient> GetById(long id)
         {
-            var item = _context.Hospitals.Find(id);
+            var item = _context.Patients.Find(id);
             if (item == null)
             {
                 return NotFound();

@@ -10,8 +10,8 @@ using SkyLightWeb.Data;
 namespace SkyLightWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190708001007_Initial")]
-    partial class Initial
+    [Migration("20190709194944_Initial2")]
+    partial class Initial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -209,11 +209,43 @@ namespace SkyLightWeb.Migrations
 
                     b.Property<string>("HospitalAddress");
 
+                    b.Property<string>("HospitalCode");
+
+                    b.Property<int>("HospitalContactPersonID");
+
+                    b.Property<string>("HospitalContactPersonID1");
+
                     b.Property<string>("HospitalName");
+
+                    b.Property<double>("Latitude");
+
+                    b.Property<double>("Longitude");
+
+                    b.Property<DateTime>("RegistrationDate");
 
                     b.HasKey("HospitalId");
 
+                    b.HasIndex("HospitalContactPersonID1");
+
                     b.ToTable("Hospitals");
+                });
+
+            modelBuilder.Entity("SkyLightWeb.Models.HospitalContactPerson", b =>
+                {
+                    b.Property<string>("HospitalContactPersonID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.HasKey("HospitalContactPersonID");
+
+                    b.ToTable("HospitalContactPersons");
                 });
 
             modelBuilder.Entity("SkyLightWeb.Models.Nurse", b =>
@@ -241,9 +273,7 @@ namespace SkyLightWeb.Migrations
                     b.Property<string>("PatientID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("HospitalID");
-
-                    b.Property<string>("HospitalId");
+                    b.Property<string>("HospitalID");
 
                     b.Property<string>("PatientAddress");
 
@@ -251,7 +281,7 @@ namespace SkyLightWeb.Migrations
 
                     b.HasKey("PatientID");
 
-                    b.HasIndex("HospitalId");
+                    b.HasIndex("HospitalID");
 
                     b.ToTable("Patients");
                 });
@@ -308,6 +338,13 @@ namespace SkyLightWeb.Migrations
                         .HasForeignKey("HospitalId");
                 });
 
+            modelBuilder.Entity("SkyLightWeb.Models.Hospital", b =>
+                {
+                    b.HasOne("SkyLightWeb.Models.HospitalContactPerson", "HospitalContactPerson")
+                        .WithMany("Hospitals")
+                        .HasForeignKey("HospitalContactPersonID1");
+                });
+
             modelBuilder.Entity("SkyLightWeb.Models.Nurse", b =>
                 {
                     b.HasOne("SkyLightWeb.Models.Hospital", "Hospital")
@@ -319,7 +356,7 @@ namespace SkyLightWeb.Migrations
                 {
                     b.HasOne("SkyLightWeb.Models.Hospital", "Hospital")
                         .WithMany("Patients")
-                        .HasForeignKey("HospitalId");
+                        .HasForeignKey("HospitalID");
                 });
 #pragma warning restore 612, 618
         }
