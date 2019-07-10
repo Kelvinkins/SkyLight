@@ -12,6 +12,7 @@ namespace SkyLightWeb.Models
         public bool UnIdentified { get; set; }
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public string MaritalStatus { get; set; }
         //Contact Info
         public string PatientAddress { get; set; }
         public string PatientAddressTwo { get; set; }
@@ -21,6 +22,7 @@ namespace SkyLightWeb.Models
         public string PostalCode { get; set; }
         public string PhoneNumber { get; set; }
         public List<Relative> Relatives { get; set; }
+        public List<Visit> Visits { get; set; }
 
         //Hospital Detail
         public string HospitalID { get; set; }

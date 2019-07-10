@@ -22,6 +22,9 @@ namespace SkyLightWeb.Data
         public DbSet<HospitalContactPerson> HospitalContactPersons { get; set; }
         public DbSet<Vital> Vitals { get; set; }
         public DbSet<Relative> Relatives { get; set; }
+        public DbSet<Visit> Visits { get; set; }
+        public DbSet<Diagnosis> Diagnoses{get;set;}
+
 
 
     }
