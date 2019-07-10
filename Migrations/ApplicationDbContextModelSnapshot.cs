@@ -205,7 +205,7 @@ namespace SkyLightWeb.Migrations
 
                     b.HasIndex("VisitID");
 
-                    b.ToTable("Appointment");
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("SkyLightWeb.Models.Diagnosis", b =>
@@ -315,7 +315,7 @@ namespace SkyLightWeb.Migrations
 
                     b.HasIndex("HospitalId");
 
-                    b.ToTable("Location");
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("SkyLightWeb.Models.Nurse", b =>
