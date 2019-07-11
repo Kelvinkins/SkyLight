@@ -24,6 +24,19 @@ namespace SkyLightWeb.Models
         public List<Relative> Relatives { get; set; }
         public List<Visit> Visits { get; set; }
 
+        //Danger zone
+        public bool Deceased { get; set; }
+        public DateTime DateOfDeath { get; set; }
+        public string CauseOfDeath { get; set; }
+        public string MarkedBy { get; set; }
+        public bool Deleted { get; set; }
+        public DateTime DateDeleted { get; set; }
+        public string Reason { get; set; }
+        public string DeletedBy { get; set; }
+
+        //Status
+        public string PatientType { get; set; }//In Or Out Patient
+
         //Hospital Detail
         public string HospitalID { get; set; }
         public Hospital Hospital { get; set; }

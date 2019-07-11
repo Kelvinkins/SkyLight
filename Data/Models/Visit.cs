@@ -12,12 +12,15 @@ namespace SkyLightWeb.Models
         public string By { get; set; }
         public string LocationID { get; set; }
         public Location Location { get; set; }
-        public string PatientID { get; set; }
-        public Patient Patient { get; set; }
+
         public List<Diagnosis> Diagnoses { get; set; }
         public List<Appointment> Appointments { get; set; }
+        public List<Allergy> Allergies { get; set; }
+        public List<Attachment> Attachments { get; set; }
+        public List<Condition> Conditions { get; set; }
 
-
+        public string PatientID { get; set; }
+        public Patient Patient { get; set; }
         public int HospitalID { get; set; }
         public Hospital Hospital { get; set; }
 

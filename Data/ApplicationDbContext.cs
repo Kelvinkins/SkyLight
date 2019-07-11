@@ -26,7 +26,9 @@ namespace SkyLightWeb.Data
         public DbSet<Diagnosis> Diagnoses { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
-
+        public DbSet<Allergy> Allergies { get; set; }
+        public DbSet<Attachment> Attachments { get; set; }
+        public DbSet<Condition> Conditions { get; set; }
 
 
 
