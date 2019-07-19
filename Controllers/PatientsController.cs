@@ -22,6 +22,18 @@ namespace SkyLightWeb.Controllers
             }
         }
 
+          [HttpPost(Name = "AddPatient")]
+        public ActionResult<Patient> Add(Patient patient)
+        {
+            if (patient == null)
+            {
+                return NotFound();
+            }
+            _context.Patients.Add(patient);
+            _context.SaveChanges();
+            return patient;
+        }
+
         [HttpGet]
         public ActionResult<List<Patient>> GetAll()
         {

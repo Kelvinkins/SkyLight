@@ -341,11 +341,11 @@ namespace SkyLightWeb.Migrations
 
                     b.Property<string>("HospitalCode");
 
-                    b.Property<int>("HospitalContactPersonID");
-
-                    b.Property<string>("HospitalContactPersonID1");
+                    b.Property<string>("HospitalContactPersonID");
 
                     b.Property<string>("HospitalName");
+
+                    b.Property<bool>("IsActive");
 
                     b.Property<double>("Latitude");
 
@@ -355,7 +355,7 @@ namespace SkyLightWeb.Migrations
 
                     b.HasKey("HospitalId");
 
-                    b.HasIndex("HospitalContactPersonID1");
+                    b.HasIndex("HospitalContactPersonID");
 
                     b.ToTable("Hospitals");
                 });
@@ -394,6 +394,32 @@ namespace SkyLightWeb.Migrations
                     b.HasIndex("HospitalId");
 
                     b.ToTable("Locations");
+                });
+
+            modelBuilder.Entity("SkyLightWeb.Models.Log", b =>
+                {
+                    b.Property<string>("LogID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Extra");
+
+                    b.Property<int>("HospitalID");
+
+                    b.Property<string>("HospitalId");
+
+                    b.Property<string>("Location");
+
+                    b.Property<DateTime>("LogDate");
+
+                    b.Property<int>("OperationCode");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("LogID");
+
+                    b.HasIndex("HospitalId");
+
+                    b.ToTable("Logs");
                 });
 
             modelBuilder.Entity("SkyLightWeb.Models.Nurse", b =>
@@ -620,7 +646,7 @@ namespace SkyLightWeb.Migrations
             modelBuilder.Entity("SkyLightWeb.Models.Allergy", b =>
                 {
                     b.HasOne("SkyLightWeb.Models.Hospital", "Hospital")
-                        .WithMany()
+                        .WithMany("Allergies")
                         .HasForeignKey("HospitalId");
 
                     b.HasOne("SkyLightWeb.Models.Visit", "Visit")
@@ -631,7 +657,7 @@ namespace SkyLightWeb.Migrations
             modelBuilder.Entity("SkyLightWeb.Models.Appointment", b =>
                 {
                     b.HasOne("SkyLightWeb.Models.Hospital", "Hospital")
-                        .WithMany()
+                        .WithMany("Appointments")
                         .HasForeignKey("HospitalId");
 
                     b.HasOne("SkyLightWeb.Models.Visit", "Visit")
@@ -642,7 +668,7 @@ namespace SkyLightWeb.Migrations
             modelBuilder.Entity("SkyLightWeb.Models.Attachment", b =>
                 {
                     b.HasOne("SkyLightWeb.Models.Hospital", "Hospital")
-                        .WithMany()
+                        .WithMany("Attachments")
                         .HasForeignKey("HospitalId");
 
                     b.HasOne("SkyLightWeb.Models.Visit", "Visit")
@@ -653,7 +679,7 @@ namespace SkyLightWeb.Migrations
             modelBuilder.Entity("SkyLightWeb.Models.Condition", b =>
                 {
                     b.HasOne("SkyLightWeb.Models.Hospital", "Hospital")
-                        .WithMany()
+                        .WithMany("Conditions")
                         .HasForeignKey("HospitalId");
 
                     b.HasOne("SkyLightWeb.Models.Visit", "Visit")
@@ -664,7 +690,7 @@ namespace SkyLightWeb.Migrations
             modelBuilder.Entity("SkyLightWeb.Models.Diagnosis", b =>
                 {
                     b.HasOne("SkyLightWeb.Models.Hospital", "Hospital")
-                        .WithMany()
+                        .WithMany("Diagnoses")
                         .HasForeignKey("HospitalId");
 
                     b.HasOne("SkyLightWeb.Models.Visit", "Visit")
@@ -683,10 +709,17 @@ namespace SkyLightWeb.Migrations
                 {
                     b.HasOne("SkyLightWeb.Models.HospitalContactPerson", "HospitalContactPerson")
                         .WithMany("Hospitals")
-                        .HasForeignKey("HospitalContactPersonID1");
+                        .HasForeignKey("HospitalContactPersonID");
                 });
 
             modelBuilder.Entity("SkyLightWeb.Models.Location", b =>
+                {
+                    b.HasOne("SkyLightWeb.Models.Hospital", "Hospital")
+                        .WithMany("Locations")
+                        .HasForeignKey("HospitalId");
+                });
+
+            modelBuilder.Entity("SkyLightWeb.Models.Log", b =>
                 {
                     b.HasOne("SkyLightWeb.Models.Hospital", "Hospital")
                         .WithMany()
@@ -710,7 +743,7 @@ namespace SkyLightWeb.Migrations
             modelBuilder.Entity("SkyLightWeb.Models.Relative", b =>
                 {
                     b.HasOne("SkyLightWeb.Models.Hospital", "Hospital")
-                        .WithMany()
+                        .WithMany("Relatives")
                         .HasForeignKey("HospitalId");
 
                     b.HasOne("SkyLightWeb.Models.Patient", "Patient")
@@ -721,7 +754,7 @@ namespace SkyLightWeb.Migrations
             modelBuilder.Entity("SkyLightWeb.Models.Visit", b =>
                 {
                     b.HasOne("SkyLightWeb.Models.Hospital", "Hospital")
-                        .WithMany()
+                        .WithMany("Visits")
                         .HasForeignKey("HospitalId");
 
                     b.HasOne("SkyLightWeb.Models.Location", "Location")
@@ -736,7 +769,7 @@ namespace SkyLightWeb.Migrations
             modelBuilder.Entity("SkyLightWeb.Models.Vital", b =>
                 {
                     b.HasOne("SkyLightWeb.Models.Hospital", "Hospital")
-                        .WithMany()
+                        .WithMany("Vitals")
                         .HasForeignKey("HospitalId");
 
                     b.HasOne("SkyLightWeb.Models.Patient", "Patient")

@@ -29,7 +29,7 @@ namespace SkyLightWeb.Data
         public DbSet<Allergy> Allergies { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
         public DbSet<Condition> Conditions { get; set; }
-
+        public DbSet<Log> Logs { get; set; }
 
 
 
